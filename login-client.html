@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <meta name="description" content="Connectez-vous à votre compte J'ai faim pour retrouver vos restaurants favoris.">
+  <title>Connexion Client — J'ai faim</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-inscription">
+
+  <!-- ============ HEADER ============ -->
+  <header class="page-header">
+    <a href="index.html" class="back-btn" aria-label="Retour à l'accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </a>
+    <h1 class="page-title">Connexion Client</h1>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="inscription-intro" aria-label="Présentation">
+      <p>Connectez-vous pour retrouver vos restaurants favoris.</p>
+    </section>
+
+    <!-- ============ FORMULAIRE ============ -->
+    <form class="inscription-form" action="#" method="post">
+
+      <div class="field">
+        <label for="login-email">Adresse email</label>
+        <input
+          type="email"
+          id="login-email"
+          name="email"
+          placeholder="vous@exemple.com"
+          inputmode="email"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="login-password">Mot de passe</label>
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          required
+          minlength="6"
+        >
+      </div>
+
+      <button type="submit" class="cta-primary">Se connecter</button>
+
+    </form>
+
+    <!-- ============ NOTE BAS DE PAGE ============ -->
+    <p class="login-note">
+      Pas encore de compte ? <a href="inscription-client.html">Inscrivez-vous</a>
+    </p>
+
+  </main>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js" defer></script>
+  <script src="js/auth-client.js" defer></script>
+
+</body>
+</html>

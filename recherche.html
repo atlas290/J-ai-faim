@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <title>Recherche — J'ai faim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <h1 class="page-title">Recherche</h1>
+  </header>
+
+  <main>
+    <form class="search-bar search-bar-plain" role="search" onsubmit="return false;">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Que voulez-vous manger ?" autocomplete="off">
+    </form>
+
+<button type="button" class="filter-pill active" data-category="Tous">Tous</button>
+      <button type="button" class="filter-pill" data-category="Petit déjeuner">Petit déjeuner</button>
+      <button type="button" class="filter-pill" data-category="Déjeuner">Déjeuner</button>
+      <button type="button" class="filter-pill" data-category="Dîner">Dîner</button>
+
+    </div>
+
+    <span class="filter-label">Prix</span>
+    <div class="filter-row" role="group" aria-label="Filtrer par prix">
+      <button type="button" class="filter-pill active" data-price="all">Tous les prix</button>
+      <button type="button" class="filter-pill" data-price="0-2000">Moins de 2 000 FCFA</button>
+      <button type="button" class="filter-pill" data-price="2000-5000">2 000 – 5 000 FCFA</button>
+      <button type="button" class="filter-pill" data-price="5000+">Plus de 5 000 FCFA</button>
+    </div>
+
+    <section class="section" aria-label="Résultats de recherche">
+      <div class="restaurants" id="search-results">
+        <div class="empty-state">
+          <h2 class="empty-state-title">Lancez votre recherche</h2>
+          <p class="empty-state-text">Saisissez un plat, un restaurant ou choisissez un filtre.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <a href="index.html" class="nav-item"><span>Accueil</span></a>
+    <a href="recherche.html" class="nav-item active"><span>Recherche</span></a>
+    <a href="hasard.html" class="nav-item"><span>Surprends-moi</span></a>
+    <a href="profil.html" class="nav-item"><span>Profil</span></a>
+  </nav>
+
+  <!-- Firebase SDK Compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    alert("Le script de recherche a bien démarré !"); // <-- LIGNE DE TEST
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDhZlwQv9YEi88S9MgPBHKmo6Lgq1-rrs",
+      authDomain: "jai-faim-d5e80.firebaseapp.com",
+      projectId: "jai-faim-d5e80",
+      storageBucket: "jai-faim-d5e80.firebasestorage.app",
+      messagingSenderId: "208346031068",
+      appId: "1:208346031068:web:b0323b1a51e1eab6a7a519"
+    };
+
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let restaurantsData = [];
+    const state = { searchTerm: "", activeCategory: null, activePrice: null };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const resultsEl = document.getElementById("search-results");
+      const searchEl = document.getElementById("search-input");
+
+      db.collection("restaurants").get().then(snap => {
+        restaurantsData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        restaurantsData.sort((a, b) => Number(b.sponsorise === true) - Number(a.sponsorise === true));
+        filtrer();
+      }).catch(err => {
+        console.error("Erreur Firebase:", err);
+        resultsEl.innerHTML = `<p style="color:red;text-align:center;">Erreur de connexion.</p>`;
+      });
+
+      if (searchEl) {
+        searchEl.addEventListener("input", (e) => {
+          state.searchTerm = e.target.value;
+          filtrer();
+        });
+      }
+
+      document.querySelectorAll(".filter-pill[data-category]").forEach(pill => {
+        pill.addEventListener("click", () => {
+          const cat = pill.dataset.category;
+          if (cat === "Tous") state.activeCategory = null;
+          else state.activeCategory = (state.activeCategory === cat) ? null : cat;
+          updateUI();
+          filtrer();
+        });
+      });
+
+      document.querySelectorAll(".filter-pill[data-price]").forEach(pill => {
+        pill.addEventListener("click", () => {
+          const price = pill.dataset.price;
+          if (price === "all") state.activePrice = null;
+          else state.activePrice = (state.activePrice === price) ? null : price;
+          updateUI();
+          filtrer();
+        });
+      });
+
+      function updateUI() {
+        document.querySelectorAll(".filter-pill[data-category]").forEach(p => {
+          const isActive = (p.dataset.category === "Tous" && !state.activeCategory) || (p.dataset.category === state.activeCategory);
+          p.classList.toggle("active", isActive);
+        });
+        document.querySelectorAll(".filter-pill[data-price]").forEach(p => {
+          const isActive = (p.dataset.price === "all" && !state.activePrice) || (p.dataset.price === state.activePrice);
+          p.classList.toggle("active", isActive);
+        });
+      }
+
+      function filtrer() {
+        const term = state.searchTerm.toLowerCase();
+        const filtered = restaurantsData.filter(r => {
+          const matchSearch = !term || (r.nom && r.nom.toLowerCase().includes(term));
+          const matchCat = !state.activeCategory || r.categorie === state.activeCategory;
+          
+          let matchPrice = true;
+          if (state.activePrice) {
+            const priceNum = parseInt(String(r.prix).replace(/\D/g, "")) || 0;
+            if (state.activePrice === "0-2000") matchPrice = priceNum < 2000;
+            else if (state.activePrice === "2000-5000") matchPrice = priceNum >= 2000 && priceNum <= 5000;
+            else if (state.activePrice === "5000+") matchPrice = priceNum > 5000;
+          }
+          return matchSearch && matchCat && matchPrice;
+        });
+
+        if (filtered.length === 0) {
+          resultsEl.innerHTML = `<div class="empty-state"><h2 class="empty-state-title">Aucun résultat</h2><p class="empty-state-text">Aucun restaurant ne correspond.</p></div>`;
+          return;
+        }
+
+        resultsEl.innerHTML = filtered.map(r => {
+          const img = r.image || 'https://placehold.co/400x300/f5ede0/8a7f76?text=Resto';
+          const badge = r.sponsorise ? `<span class="badge-sponsored">⭐ Sponsorisé</span>` : "";
+          return `
+            <a href="resto.html?id=${r.id}" class="restaurant-card" style="position:relative;">
+              ${badge}
+              <img src="${img}" alt="${r.nom}" class="card-image" loading="lazy">
+              <div class="card-body">
+                <h3 class="card-title">${r.nom || 'Sans nom'}</h3>
+                <div class="card-meta">
+                  <span class="star">⭐ ${r.note || 'N/A'}</span>
+                  <span class="dot">·</span>
+                  <span>${r.distance || '0 km'}</span>
+                </div>
+                <p class="card-price">${r.prix || 'Menu à venir'}</p>
+                <span class="card-btn">Voir le menu</span>
+              </div>
+            </a>
+          `;
+        }).join("");
+      }
+    });
+  </script>
+</body>
+</html>

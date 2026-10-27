@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <meta name="description" content="Inscrivez votre restaurant sur J'ai faim et recevez vos commandes directement sur WhatsApp. Gratuit.">
+  <title>Inscrire mon restaurant — J'ai faim</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+<!-- Firebase SDK Compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js" defer></script>
+
+  <!-- Ton script inscription.js -->
+  <script src="js/inscription.js" defer></script>
+
+</head>
+<body class="page-inscription">
+
+  <!-- ============ HEADER DE PAGE ============ -->
+  <header class="page-header">
+    <a href="index.html" class="back-btn" aria-label="Retour à l'accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </a>
+    <h1 class="page-title">Inscrire mon restaurant</h1>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="inscription-intro" aria-label="Présentation">
+      <p>Rejoignez <strong>J'ai faim</strong> et recevez vos commandes directement sur WhatsApp. C'est gratuit.</p>
+    </section>
+
+    <!-- ============ FORMULAIRE ============ -->
+    <form class="inscription-form" action="#" method="post">
+
+      <div class="field">
+        <label for="resto-name">Nom du restaurant</label>
+        <input
+          type="text"
+          id="resto-name"
+          name="restaurant_name"
+          placeholder="Chez Maman Bénin"
+          autocomplete="organization"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="resto-whatsapp">Numéro WhatsApp</label>
+        <input
+          type="tel"
+          id="resto-whatsapp"
+          name="whatsapp"
+          placeholder="97000000"
+          inputmode="tel"
+          autocomplete="tel"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="resto-cuisine">Type de cuisine</label>
+        <input
+          type="text"
+          id="resto-cuisine"
+          name="cuisine"
+          placeholder="Africain, Burger..."
+          list="cuisine-options"
+          required
+        >
+        <datalist id="cuisine-options">
+          <option value="Africain"></option>
+          <option value="Burger"></option>
+          <option value="Poulet"></option>
+          <option value="Pizza"></option>
+          <option value="Boissons"></option>
+          <option value="Asiatique"></option>
+        </datalist>
+      </div>
+
+      <div class="field">
+        <label for="resto-address">Adresse / Quartier</label>
+        <input
+          type="text"
+          id="resto-address"
+          name="address"
+          placeholder="Akpakpa"
+          autocomplete="street-address"
+          required
+        >
+      </div>
+<div class="field">
+        <label for="email">Adresse email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="vous@resto.com" 
+          autocomplete="email" 
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="6 caractères minimum" 
+          autocomplete="new-password" 
+          required 
+          minlength="6"
+        >
+      </div>
+
+      <button type="submit" class="cta-primary">Créer mon compte resto</button>
+
+    </form>
+
+    <!-- ============ NOTE BAS DE PAGE ============ -->
+    <p class="login-note">
+      Déjà inscrit ? <a href="#">Connectez-vous</a>
+    </p>
+
+  </main>
+
+</body>
+</html>

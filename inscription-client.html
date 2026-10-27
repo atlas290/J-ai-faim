@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <meta name="description" content="Créez votre compte J'ai faim pour sauvegarder vos restaurants favoris.">
+  <title>Inscription Client — J'ai faim</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-inscription">
+
+  <!-- ============ HEADER ============ -->
+  <header class="page-header">
+    <a href="index.html" class="back-btn" aria-label="Retour à l'accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </a>
+    <h1 class="page-title">Créer un compte</h1>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="inscription-intro" aria-label="Présentation">
+      <p>Rejoignez <strong>J'ai faim</strong> pour sauvegarder vos restaurants favoris.</p>
+    </section>
+
+    <!-- ============ FORMULAIRE ============ -->
+    <form class="inscription-form" action="#" method="post">
+
+      <div class="field">
+        <label for="client-name">Votre nom</label>
+        <input
+          type="text"
+          id="client-name"
+          name="name"
+          placeholder="Ex: Jean"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="client-email">Adresse email</label>
+        <input
+          type="email"
+          id="client-email"
+          name="email"
+          placeholder="vous@exemple.com"
+          inputmode="email"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="client-password">Mot de passe</label>
+        <input
+          type="password"
+          id="client-password"
+          name="password"
+          placeholder="6 caractères minimum"
+          autocomplete="new-password"
+          required
+          minlength="6"
+        >
+      </div>
+
+      <button type="submit" class="cta-primary">S'inscrire</button>
+
+    </form>
+
+    <!-- ============ NOTE BAS DE PAGE ============ -->
+    <p class="login-note">
+      Déjà un compte ? <a href="login-client.html">Connectez-vous</a>
+    </p>
+
+  </main>
+
+  <!-- Firebase SDK Compat (App + Auth) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+
+  <!-- Script client (login + inscription) -->
+  <script src="js/auth-client.js"></script>
+
+</body>
+</html>

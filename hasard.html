@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e8">
+  <meta name="description" content="Vous ne savez pas quoi manger ? Laissez J'ai faim choisir un restaurant pour vous.">
+  <title>Surprends-moi — J'ai faim</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="page-header">
+    <h1 class="page-title">Surprends-moi</h1>
+  </header>
+
+  <main>
+
+    <!-- ============ INTRO ============ -->
+    <section class="surprise-intro" aria-label="Présentation">
+      <p class="surprise-intro-lead">Vous ne savez pas quoi manger ?</p>
+      <p class="surprise-intro-title">Laissez-nous choisir pour vous !</p>
+    </section>
+
+    <!-- ============ CERCLE MYSTÈRE ============ -->
+    <div class="surprise-hero" aria-hidden="true">
+      <div class="surprise-circle">
+        <span class="surprise-question">🎲</span>
+      </div>
+    
+    </div>
+
+    <!-- ============ BOUTON LANCER ============ -->
+    <div class="surprise-action">
+      <button type="button" class="btn-surprise-launch">
+        <span class="btn-surprise-dice" aria-hidden="true">🎲</span>
+        <span>Lancer le dé</span>
+      </button>
+    </div>
+
+    <!-- ============ RÉSULTAT (caché par défaut) ============ -->
+    <section
+      class="surprise-result"
+      id="surprise-result"
+      aria-label="Restaurant sélectionné"
+      aria-live="polite"
+    >
+      <a href="resto.html" class="restaurant-card">
+        <img
+          src="https://placehold.co/400x300/f5e6c8/2c2416?text=Surprise"
+          alt="Restaurant sélectionné au hasard"
+          class="card-image"
+          width="400"
+          height="300"
+          loading="lazy"
+        >
+        <div class="card-body">
+          <h3 class="card-title">Chez Maman Bénin</h3>
+          <div class="card-meta">
+            <span class="star-icon" aria-hidden="true">⭐</span>
+            <span class="rating">4.9</span>
+            <span class="dot">·</span>
+            <span>0.8 km</span>
+          </div>
+          <p class="card-price">2 500 FCFA</p>
+          <span class="card-btn">Voir le menu</span>
+        </div>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <a href="index.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11l9-8 9 8v10a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2V11z"/>
+      </svg>
+      <span>Accueil</span>
+    </a>
+
+    <a href="recherche.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <span>Recherche</span>
+    </a>
+
+    <a href="#" class="nav-item active" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3z"/>
+      </svg>
+      <span>Surprends-moi</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Profil</span>
+    </a>
+  </nav>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="js/hasard.js"></script>
+
+</body>
+</html>

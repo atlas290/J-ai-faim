@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Panier — J'ai faim</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-panier">
+  <main style="padding: 20px; padding-bottom: 250px;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h1 style="font-family: 'Playfair Display', serif; margin: 0;">Mon Panier</h1>
+      <a href="index.html" style="color: var(--accent); text-decoration: none; font-weight: bold; font-size: 14px;">Retour au menu</a>
+    </div>
+    
+    <!-- Liste des articles -->
+    <div id="panier-liste" style="display: flex; flex-direction: column; gap: 15px;"></div>
+
+    <div id="panier-vide" style="display: none; text-align: center; margin-top: 50px;">
+      <p style="color: var(--text-muted);">Votre panier est vide.</p>
+      <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 15px; text-decoration: none;">Retour à l'accueil</a>
+    </div>
+
+    <!-- Formulaire de livraison -->
+    <div id="formulaire-livraison" style="display: none; margin-top: 30px; background: var(--card); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow-card);">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 0; margin-bottom: 20px;">Vos coordonnées</h2>
+      
+      <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Votre nom</label>
+      <input type="text" id="client-nom" placeholder="Ex: Jean" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; font-size: 16px; background: var(--bg); color: var(--text);">
+
+      <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Mode de récupération</label>
+      <select id="mode-recuperation" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; font-size: 16px; background: var(--bg); color: var(--text);">
+        <option value="Livraison">Livraison 🛵</option>
+        <option value="À emporter">À emporter 🛍️</option>
+        <option value="Sur place">Sur place 🍽️</option>
+      </select>
+
+      <!-- Bloc Adresse (visible uniquement pour Livraison) -->
+      <div id="bloc-adresse">
+        <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Adresse ou lien Google Maps</label>
+        <input type="text" id="client-adresse" placeholder="Ex: Akpakpa, rue 123 ou collez un lien Maps" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; font-size: 16px; background: var(--bg); color: var(--text);">
+      </div>
+
+      <!-- Bloc Table (visible uniquement pour Sur place) -->
+      <div id="bloc-table" style="display: none;">
+        <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Numéro de table</label>
+        <input type="text" id="client-table" placeholder="Ex: Table 4" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; font-size: 16px; background: var(--bg); color: var(--text);">
+      </div>
+
+      <label style="display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px;">Remarque ou allergies (optionnel)</label>
+      <textarea id="client-remarque" placeholder="Ex: Bien épicé, pas d'oignons..." rows="2" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 5px; font-size: 16px; background: var(--bg); color: var(--text); resize: none;"></textarea>
+    </div>
+
+  </main>
+
+  <div id="panier-footer" style="position: fixed; bottom: 0; left: 0; width: 100%; background: var(--card); padding: 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); display: none; z-index: 100;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; font-size: 18px;">
+      <span>Total :</span>
+      <span id="panier-total" style="color: var(--accent);">0 FCFA</span>
+    </div>
+    <button id="btn-valider" class="btn-primary" style="width: 100%; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px;">Commander sur WhatsApp</button>
+    <p style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 10px; margin-bottom: 0;">Paiement à la livraison ou sur place.</p>
+  </div>
+
+  <script src="js/panier.js"></script>
+</body>
+</html>
